@@ -2,22 +2,25 @@
 	"name": "Job Search App",
 	"version": "1.0.0",
 	"description": "",
+	"type": "module",
 	"main": "dist/index.js",
 	"scripts": {
-		"dev": "concurrently \"tsc -watch src/index.ts\" \"nodemon ./dist/index.js\" ",
+		"dev1": "concurrently \"tsc -watch src/index.ts\" \"nodemon ./dist/index.js\" ",
 		"dev2": "tsx watch src/index.ts",
-		"build": "tsc",
+		"dev": "tsx watch src/index.ts",
+		"start": "node dist/index.js",
+		"build1": "tsc",
+		"build": "tsup",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
-	"type": "commonjs",
 	"dependencies": {
 		"@vercel/functions": "^3.7.6",
 		"argon2": "^0.45.1",
 		"bcrypt": "^6.0.0",
-		"chalk": "^4.1.2",
+		"chalk": "^6.0.0",
 		"cloudinary": "^2.10.0",
 		"cookie-parser": "^1.4.7",
 		"cors": "^2.8.6",
@@ -25,7 +28,7 @@
 		"exceljs": "^4.4.0",
 		"express": "^5.2.1",
 		"express-rate-limit": "^8.6.1",
-		"file-type": "^16.5.4",
+		"file-type": "^22.0.2",
 		"firebase-admin": "^14.3.0",
 		"google-auth-library": "^11.0.0",
 		"graphql": "^17.0.2",
@@ -55,7 +58,8 @@
 		"@types/streamifier": "^0.1.2",
 		"concurrently": "^10.0.4",
 		"nodemon": "^3.1.14",
-		"tsx": "^4.23.1",
+		"tsup": "^8.5.1",
+		"tsx": "^4.23.13",
 		"typescript": "^5.8.2"
 	}
 }
