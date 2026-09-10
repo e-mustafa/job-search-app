@@ -31,24 +31,33 @@ import { initializeSocket } from './utils/socket/socket.init';
 
 const apiBaseUrl = ENV.apiBaseUrl;
 
-export const bootstrap = async (app: Express): Promise<void> => {
+export const bootstrap = (app: Express): void => {
 	app.set('trust proxy', 1);
-	// security middlewares
+
+	// Security middlewares
 	app.use(helmet(), limiter, cors(corsOptions));
 
-	// body parsers
+	// Body parsers
 	app.use(express.json());
-	app.use(cookieParser()); // for parsing cookies
+	app.use(cookieParser());
 
-	// database connection
-	await connectDB();
-	await connectRedis();
+	// Ensure Database and Redis connections on incoming requests
+	app.use(async (_req: Request, _res: Response, next: NextFunction): Promise<void> => {
+		try {
+			await connectDB();
+			await connectRedis();
+			next();
+		} catch (error) {
+			next(error);
+		}
+	});
 
-	app.get('/', (_req: Request, res: Response) => {
+	// Base root check route
+	app.get('/', (_req: Request, res: Response): void => {
 		res.status(200).json({ message: `Welcome TO ${ENV.appName} APP` });
 	});
 
-	// routes --------------------------------------------------------
+	// Register application routers
 	app.use(`${apiBaseUrl}${authRoutes.base}`, authRouter);
 	app.use(`${apiBaseUrl}${userRoutes.base}`, userRouter);
 	app.use(`${apiBaseUrl}${companyRoutes.base}`, companyRouter);
@@ -57,20 +66,21 @@ export const bootstrap = async (app: Express): Promise<void> => {
 	app.use(`${apiBaseUrl}${notificationRoutes.base}`, notificationRouter);
 	app.use(`${apiBaseUrl}${chatRoutes.base}`, chatRouter);
 	app.use(`${apiBaseUrl}${adminRoutes.base}`, adminRouter);
-	// routes --------------------------------------------------------
 
-	// handle not found routes
-	app.use((_req: Request, _res: Response, _next: NextFunction) => {
-		throw new NotFoundException('❌ This route not exist!', 'route_not_exist');
+	// Handle non-existent routes
+	app.use((_req: Request, _res: Response, _next: NextFunction): void => {
+		throw new NotFoundException('❌ This route does not exist!', 'route_not_exist');
 	});
 
-	// error handler
+	// Global error handling middleware
 	app.use(globalErrorHandler);
 
-	const httpServer = app.listen(ENV.port, () =>
-		console.log(chalk.bgGreenBright.bold('✔ App is running on port: ' + ENV.port)),
-	);
+	// Skip app.listen and Socket initialization in Vercel environment
+	if (process.env.VERCEL !== '1') {
+		const httpServer = app.listen(ENV.port, (): void =>
+			console.log(chalk.bgGreenBright.bold('✔ App is running on port: ' + ENV.port)),
+		);
 
-	// initialize socket
-	initializeSocket(httpServer);
+		initializeSocket(httpServer);
+	}
 };

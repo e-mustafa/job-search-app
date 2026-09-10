@@ -2,7 +2,7 @@
 	"name": "Job Search App",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "dist/index.js",
 	"scripts": {
 		"dev": "concurrently \"tsc -watch src/index.ts\" \"nodemon ./dist/index.js\" ",
 		"dev2": "tsx watch src/index.ts",
