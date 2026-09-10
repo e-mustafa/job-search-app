@@ -10,7 +10,7 @@ import {
 } from './application.validation';
 
 export async function applyToJob(req: Request, res: Response) {
-	const file: IFile = req.file?.userCV || {};
+	const file: IFile = (req.file?.userCV || {}) as IFile;
 	const data = await services.applyToJob(req.user as IUserBody, req.params.jobId as string, file);
 	successResponse({ res, status: 201, message: 'You applied successfully', data });
 }

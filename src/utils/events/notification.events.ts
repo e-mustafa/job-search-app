@@ -1,4 +1,4 @@
-import { TReactionType } from '../../modules/application/application.enum';
+import { TReactionType } from '../../modules/message/message.enum';
 import { NotificationTypeEnum } from '../../modules/notification/notification.enum';
 import { Id } from '../../shared/types';
 import { sendNotification, sendNotificationToMany } from '../firebase/push.service';

@@ -14,7 +14,8 @@ export function validation(schema: TSchema) {
 		const filesData: Record<string, unknown> = {};
 
 		if (req.file) {
-			filesData[req.file.fieldname] = req.file;
+			const fieldName = req.file?.fieldname || ('' as string);
+			filesData[fieldName as string] = req.file;
 		}
 
 		if (req.files) {

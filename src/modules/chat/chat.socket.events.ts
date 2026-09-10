@@ -9,6 +9,7 @@ import {
 	ISendMessagePayload,
 	IUserTypingPayload,
 } from './chat.types';
+import { IUserBody } from '../../shared/types';
 
 // export type ChatSocketEvent =
 // 	| { type: 'message:send'; payload: ChatSendPayload }
@@ -31,7 +32,7 @@ class ChatEvents {
 	 */
 	async registerPresenceEvents(io: Server, socket: Socket): Promise<void> {
 		try {
-			const user = socket.user;
+			const user = socket.user as IUserBody;
 			const userId = user._id.toString();
 
 			console.log(`[Socket] connected: ${user.firstName} - ${socket.id}`);

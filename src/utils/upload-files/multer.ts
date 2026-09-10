@@ -3,6 +3,7 @@ import multer from 'multer';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { BadRequestException, InternalException } from '../../shared/response/exception.response';
+import { IFile } from '../../shared/types';
 import AppError from '../error-handler/app-error';
 import { deleteFileHelper } from '../general/file.util';
 import { fileTypes, resolveFileTypes, TFileType } from './mime-types';
@@ -99,14 +100,14 @@ const runMiddleware = ({ multerInstance, maxCount, expectedFieldName, type, size
 				const { allowedList } = resolveFileTypes(type);
 
 				// Validate buffer or file path signatures
-				await verifyFileSignatures(uploadedFilesArray, allowedList || [], type);
+				await verifyFileSignatures(uploadedFilesArray as IFile[], allowedList || [], type);
 
 				next();
 			} catch (sigError) {
 				// Cleanup on local disk if verification fails
 				if (isLocal && uploadedFilesArray.length > 0) {
 					const allPathsToPurge = uploadedFilesArray.map((f) => f.path).filter(Boolean);
-					await deleteFileHelper(allPathsToPurge, true);
+					await deleteFileHelper(allPathsToPurge as string[], true);
 				}
 
 				if ((sigError as AppError).isOperational) {
