@@ -2,16 +2,10 @@
 	"version": 2,
 	"buildCommand": "npm run build",
 	"outputDirectory": "dist",
-	"builds": [
+	"rewrites": [
 		{
-			"src": "src/index.ts",
-			"use": "@vercel/node"
-		}
-	],
-	"routes": [
-		{
-			"src": "/(.*)",
-			"dest": "src/index.ts"
+			"source": "/(.*)",
+			"destination": "dist/index.js"
 		}
 	]
 }

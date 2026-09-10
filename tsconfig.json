@@ -13,10 +13,10 @@
 		"strictNullChecks": true,
 		"strictFunctionTypes": true,
 		"noUnusedLocals": false,
-		"noUnusedParameters": true,
+		"noUnusedParameters": false,
 
 		/* Module Interop */
-		// "esModuleInterop": true,
+		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,

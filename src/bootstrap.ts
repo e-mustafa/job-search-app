@@ -3,11 +3,12 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express, { Express, NextFunction, Request, Response } from 'express';
 import helmet from 'helmet';
-import { corsOptions } from './config/cors.config';
-import { ENV } from './config/env.config';
-import { limiter } from './config/rate-limit.config';
-import { connectDB } from './DB/connection';
-import { globalErrorHandler } from './middlewares/error.middleware';
+import { corsOptions } from './config/cors.config.js';
+import { ENV } from './config/env.config.js';
+import { limiter } from './config/rate-limit.config.js';
+import { connectDB } from './DB/connection.js';
+import { globalErrorHandler } from './middlewares/error.middleware.js';
+import { applicationRouter, applicationRoutes } from './modules/application/index.js';
 import {
 	adminRouter,
 	adminRoutes,
@@ -23,11 +24,10 @@ import {
 	notificationRoutes,
 	userRouter,
 	userRoutes,
-} from './modules';
-import { applicationRouter, applicationRoutes } from './modules/application';
-import { NotFoundException } from './shared/response/exception.response';
-import { connectRedis } from './utils/redis/client.redis';
-import { initializeSocket } from './utils/socket/socket.init';
+} from './modules/index.js';
+import { NotFoundException } from './shared/response/exception.response.js';
+import { connectRedis } from './utils/redis/client.redis.js';
+import { initializeSocket } from './utils/socket/socket.init.js';
 
 const apiBaseUrl = ENV.apiBaseUrl;
 
@@ -84,3 +84,5 @@ export const bootstrap = (app: Express): void => {
 		initializeSocket(httpServer);
 	}
 };
+
+export default bootstrap;

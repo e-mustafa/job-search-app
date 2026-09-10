@@ -7,16 +7,16 @@ export default defineConfig({
 	// Output format set strictly to ES Module
 	format: ['esm'],
 
-	// Enable code splitting and target modern Node.js environments
+	// Disable code splitting to bundle everything into a single file
 	splitting: false,
-	sourcemap: true,
+	sourcemap: false,
 	clean: true,
 	target: 'node18',
 
-	// Bundling options
+	// Bundle all internal relative modules
 	bundle: true,
-	minify: false, // Set to true if minification is desired in production
+	minify: false,
 
-	// Exclude native/external dependencies from bundle
-	external: ['express', 'mongoose', 'ioredis', 'socket.io', 'dotenv'],
+	// External dependencies excluded from bundle
+	external: ['express', 'mongoose', 'ioredis', 'socket.io', 'dotenv', 'argon2', 'bcrypt', 'file-type', 'firebase-admin'],
 });
