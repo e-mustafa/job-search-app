@@ -10,7 +10,7 @@ import { IJwtPayload } from '../utils/security/token/token.types';
 const UserRepo = userRepository;
 
 export const auth = (isOptional = false) => {
-	return async (req: Request, res: Response, next: NextFunction) => {
+	return async (req: Request, _res: Response, next: NextFunction) => {
 		const authorization = req.headers.authorization;
 
 		if (!authorization) {
@@ -57,7 +57,7 @@ export const auth = (isOptional = false) => {
 };
 
 export const authorization = (...allowedRoles: TRole[]) => {
-	return async (req: Request, res: Response, next: NextFunction) => {
+	return async (req: Request, _res: Response, next: NextFunction) => {
 		if (!allowedRoles.includes(req.user?.role || 0)) {
 			throw new UnAuthorizedException('Unauthorized Access!!', 'Auth-middleware-unauthorized');
 		}

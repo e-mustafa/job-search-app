@@ -138,7 +138,7 @@ class JobServices {
 		return await this.JobRepo.deleteOne({ _id: jobId });
 	}
 
-	async getJob(userId: Id, jobId: string) {
+	async getJob(_userId: Id, jobId: string) {
 		const job = await this.JobRepo.findById(jobId).lean().exec();
 		if (!job) {
 			throw new NotFoundException('Job not found.', 'jobService.getJobById');
@@ -146,7 +146,7 @@ class JobServices {
 		return job;
 	}
 
-	async getJobs(userId: Id, query: IGetJobsQueryDTO): Promise<IPaginatedResult<IJobWCompany>> {
+	async getJobs(_userId: Id, query: IGetJobsQueryDTO): Promise<IPaginatedResult<IJobWCompany>> {
 		const { page = 1, limit = 10, order = sortOrderEnum.DESC, ...rest } = query || {};
 		const filter: QueryFilter<IJob> = this.buildJobQueryFilter(rest);
 

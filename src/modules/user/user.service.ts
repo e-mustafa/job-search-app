@@ -93,7 +93,7 @@ class UserServices {
 	}
 
 	// Get User/s - visit user ------------------------------------------------
-	async getUser(targetUserId: string, userId: Id): Promise<IUser> {
+	async getUser(targetUserId: string, _userId: Id): Promise<IUser> {
 		// const [targetUser, isBlocked] = await Promise.all([
 		// 	// Check if target exist
 		// 	this.UserRepo.findById(targetUserId).lean().select(selectUserInfo).exec(),

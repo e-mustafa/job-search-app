@@ -81,14 +81,14 @@ const handleMongooseValidationError = (err: MongooseError.ValidationError): AppE
 };
 
 // --- JWT Error Transformers ---
-const handleJWTError = (originalErr: Error): AppError =>
+const handleJWTError = (): AppError =>
 	new UnAuthorizedException('Invalid token. Please log in again!', 'jwt_invalid_token');
 
-const handleJWTExpiredError = (originalErr: Error): AppError =>
+const handleJWTExpiredError = (): AppError =>
 	new UnAuthorizedException('Your session has expired! Please log in again.', 'jwt_expired_token');
 
 // --- Global Error Handler Middleware ---
-export const globalErrorHandler = (err: unknown, req: Request, res: Response, next: NextFunction) => {
+export const globalErrorHandler = (err: unknown, req: Request, res: Response, _next: NextFunction) => {
 	let error: AppError;
 
 	const errObject = err as Error & { code?: number; cause?: { code?: number } };
@@ -101,9 +101,9 @@ export const globalErrorHandler = (err: unknown, req: Request, res: Response, ne
 	} else if (errObject?.name === 'ValidationError' && !(err instanceof AppError)) {
 		error = handleMongooseValidationError(err as MongooseError.ValidationError);
 	} else if (errObject?.name === 'JsonWebTokenError') {
-		error = handleJWTError(errObject);
+		error = handleJWTError();
 	} else if (errObject?.name === 'TokenExpiredError') {
-		error = handleJWTExpiredError(errObject);
+		error = handleJWTExpiredError();
 	} else if (err instanceof AppError) {
 		error = err;
 	} else {

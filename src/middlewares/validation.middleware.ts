@@ -5,7 +5,7 @@ import { IFieldErrors, TSchema, TSchemaKey } from '../shared/types/validation.ty
 import { validateFields } from '../shared/validation/validate-fields.validation';
 
 export function validation(schema: TSchema) {
-	return (req: Request, res: Response, next: NextFunction) => {
+	return (req: Request, _res: Response, next: NextFunction) => {
 		if (!req || !schema) {
 			throw new InternalException('Validation schema or data is missing', 'ValidationError');
 		}

@@ -259,7 +259,7 @@ class ChatSocketService {
 	/**
 	 * Fetches current connected sockets count for a user
 	 */
-	async getUserSocketCount(io: Server, userId: Id): Promise<number> {
+	async getUserSocketCount(_io: Server, userId: Id): Promise<number> {
 		return await redisConnectedSocket.getSocketCount(userId.toString());
 	}
 

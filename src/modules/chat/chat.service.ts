@@ -99,7 +99,7 @@ class ChatServices {
 	// 	return newGroup;
 	// }
 
-	async createGroup(user: IUserBody, body: ICreateGroupDTO, groupImg: IFile): Promise<IChat> {
+	async createGroup(user: IUserBody, body: ICreateGroupDTO, _groupImg: IFile): Promise<IChat> {
 		const { participants, groupName } = body;
 
 		const blockedIds = await this.BlockRepo.getBlockedUsersIds(user._id);

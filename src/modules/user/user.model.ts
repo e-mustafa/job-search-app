@@ -163,7 +163,7 @@ const userSchema = new Schema<IUser>(
 		toJSON: {
 			virtuals: true,
 			getters: true,
-			transform(doc, ret) {
+			transform(_doc, ret) {
 				ret.id = ret._id.toString();
 				delete ret.password;
 				// delete ret._id;
