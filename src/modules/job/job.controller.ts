@@ -19,7 +19,7 @@ export async function updateJob(req: Request, res: Response) {
 
 export async function deleteJob(req: Request, res: Response) {
 	const { jobId } = req.params || {};
-	await services.deleteJob(req.user?._id as Id, jobId as string, jobId as string);
+	await services.deleteJob(req.user?._id as Id, jobId as string);
 	successResponse({ res, message: 'Job deleted successfully' });
 }
 

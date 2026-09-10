@@ -1,0 +1,1657 @@
+{
+  "info": {
+    "_postman_id": "cc11872d-3571-4f33-875c-455cae864242",
+    "name": "Job Search App",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49016393",
+    "_collection_link": "https://go.postman.co/collection/49016393-cc11872d-3571-4f33-875c-455cae864242?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Toggle User Ban/ unban",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/users/:userId/toggle-ban",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "users",
+                ":userId",
+                "toggle-ban"
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "6aa17c39b2f47d289a3a81b6"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Company Ban/ unban",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/companies/:companyId/toggle-ban",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "companies",
+                ":companyId",
+                "toggle-ban"
+              ],
+              "variable": [
+                {
+                  "key": "companyId",
+                  "value": "6aa18898d130ddaf6f1cf065"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Aprove Company",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/companies/:companyId/approve",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "companies",
+                ":companyId",
+                "approve"
+              ],
+              "variable": [
+                {
+                  "key": "companyId",
+                  "value": "6aa18898d130ddaf6f1cf065"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Users and companies GQL",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query GetCompanies {\r\n    getCompanies {\r\n        data {\r\n            _id\r\n            id\r\n            companyName\r\n            companyEmail\r\n            description\r\n            industry\r\n            address\r\n            numberOfEmployees\r\n            website\r\n            HRs {\r\n                id\r\n                firstName\r\n                email\r\n                lastName\r\n            }\r\n            approvedByAdmin\r\n            bannedAt\r\n            deletedAt\r\n            createdAt\r\n            updatedAt\r\n            createdBy {\r\n                id\r\n                lastName\r\n                firstName\r\n                username\r\n                email\r\n            }\r\n            legalAttachment {\r\n                public_id\r\n                secure_url\r\n            }\r\n        }\r\n        metadata {\r\n            page\r\n            limit\r\n            total\r\n            totalPages\r\n            hasNext\r\n            hasPrev\r\n        }\r\n    }\r\n    getUsers {\r\n        metadata {\r\n            page\r\n            limit\r\n            total\r\n            totalPages\r\n            hasNext\r\n            hasPrev\r\n        }\r\n        data {\r\n            _id\r\n            id\r\n            firstName\r\n            lastName\r\n            username\r\n            email\r\n            bio\r\n            mobileNumber\r\n            DOB\r\n            gender\r\n            role\r\n            provider\r\n            isConfirmed\r\n            bannedAt\r\n            deletedAt\r\n            createdAt\r\n            updatedAt\r\n        }\r\n    }\r\n}\r\n",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/graphql",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "graphql"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"firstName\": \"ali\",\r\n    \"lastName\": \"Ahmed\",\r\n    \"email\": \"ali@lnovic.com\",\r\n    \"password\": \"Password@123\",\r\n    \"confirmPassword\": \"Password@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Resend OTP - Verify Account",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"ali@lnovic.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/verify-account/resend-otp",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "verify-account",
+                "resend-otp"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Verify Account",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"ali@lnovic.com\",\r\n    \"otp\": \"702106\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/verify-account",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "verify-account"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// 1. Validate response status code\r\npm.test(\"Check if the response status code is 200\", function () { \r\n    pm.response.to.have.status(200);\r\n});\r\n\r\n// 2. Safely validate response structure and automate token storage\r\npm.test(\"Check and store access and refresh tokens\", function () { \r\n    // Parse JSON response once to optimize performance\r\n    const responseBody = pm.response.json();\r\n    \r\n    // Ensure the response contains the expected data structure\r\n    pm.expect(responseBody).to.have.property('data');\r\n    pm.expect(responseBody.data.accessToken).to.not.be.null;\r\n    pm.expect(responseBody.data.refreshToken).to.not.be.null;\r\n\r\n    // 3. Environment variables are set only if the assertions above pass successfully\r\n    pm.environment.set(\"accessToken\", responseBody.data.accessToken);\r\n    pm.environment.set(\"refreshToken\", responseBody.data.refreshToken);\r\n    \r\n    console.log(\"Tokens have been automatically updated in Environment!\");\r\n});\r\n\r\n\r\n"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    // \"email\": \"ali@lnovic.com\",\r\n    // \"email\": \"ody@lnovic.com\",\r\n    \"email\": \"aya@lnovic.com\", // admin\r\n    // \"email\": \"amir@lnovic.com\",\r\n    // \"email\": \"omar@lnovic.com\",\r\n    // \"email\": \"hind@lnovic.com\", // hr\r\n\r\n\r\n    \"password\": \"Password@123\",\r\n    \"rememberMe\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh  Access Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// 1. Validate response status code\r\npm.test(\"Check if the response status code is 200\", function () { \r\n    pm.response.to.have.status(200);\r\n});\r\n\r\n// 2. Safely validate response structure and automate token storage\r\npm.test(\"Check and store access and refresh tokens\", function () { \r\n    // Parse JSON response once to optimize performance\r\n    const responseBody = pm.response.json();\r\n    \r\n    // Ensure the response contains the expected data structure\r\n    pm.expect(responseBody).to.have.property('data');\r\n    pm.expect(responseBody.data.accessToken).to.not.be.null;\r\n\r\n\r\n    // 3. Environment variables are set only if the assertions above pass successfully\r\n    pm.environment.set(\"accessToken\", responseBody.data.accessToken);\r\n    pm.environment.set(\"refreshToken\", responseBody.data.refreshToken);\r\n\r\n    \r\n    console.log(\"accessToken have been automatically updated in Environment!\");\r\n});\r\n\r\n\r\n"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "refreshToken={{refreshToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/refresh-token",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "refresh-token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Forget password - request",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"aya@lnovic.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "Forget password - request",
+              "host": [
+                "Forget password - request"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reset password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"token\": \"9cbd56873a7c9680f0a660c76546ad8fd58507bca071be8fed2cf61dd3a3133bef11a99c555af8b36c9d2af1204fd62f977a34894a77a4bff0432c97e86562f7\",\r\n    \"password\": \"Password@1234\",\r\n    \"confirmPassword\": \"Password@1234\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/reset-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "reset-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Social Login - Google - signup/login",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"idToken\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6IjMwMzViYjg2ZDk5ZjIyZTYxMzQ2N2E2NjgwODI1ZWViMGQ4MTM5YTIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIxNTc2MzcxNzQ2MDQtdG5oaG9ibzYzcjVhNzUzMmlpc3JicDk2YWQ0YnBzaG4uYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIxNTc2MzcxNzQ2MDQtdG5oaG9ibzYzcjVhNzUzMmlpc3JicDk2YWQ0YnBzaG4uYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDgyNjAyOTk2MDc2MjE3OTkwMzAiLCJlbWFpbCI6Im14Ljl4eHhAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5iZiI6MTc4MTc5MTA4OCwibmFtZSI6IkRpc3RhbnQgSG9yaXpvbiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NMYnZsQy1uS2xqc00zdFFHaWNuVmkwd2tUZS15MU04RE9XMGxpaVhxdll4bHRhU3NJPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6IkRpc3RhbnQiLCJmYW1pbHlfbmFtZSI6Ikhvcml6b24iLCJpYXQiOjE3ODE3OTEzODgsImV4cCI6MTc4MTc5NDk4OCwianRpIjoiMzVkYWFkZjcxNGQ1YzI3OThhY2ZhNmNmOTNkYzhjYjIyNzM5ZDZjZCJ9.U72b6uj71IoBcRTwPCjLRB0VYV1NUKaiW0uNJUY3LtabKV44BHqRO6Gk8c-FpDT9uiF9l_lQB-2I47XE7BxM4jqtpXl6l_z1ZEEkGDLNhIdpHY9wRZGbyfmNmAqk14DqtVYDOU1Vb_Th2kbN2keuRbpLva19eE5t2q9KxHGhZi9avViSAUBnt4L67jfH8OfcApmD9H3z99Ta2IXK8hU28ImyQnyo8l5uHrf64H789qdxz64tDtIrCdHEWvAUkb7d1R2hLVkfpUmeTzwwpcxSmX6-X80jtiflMLVPP7Oi3VJD9Kiy-RJcc8L2eSNpYyWhkmHi20LYvVecQr2p1-ny0A\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/social-login/google",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "social-login",
+                "google"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "refreshToken={{refreshToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout  from All sessions",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "refreshToken={{refreshToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout-all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "logout-all"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Get My Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"lastName\": \"basem\",\r\n    \"gender\": 0,\r\n    \"DOB\": \"2000-10-19\",\r\n    \"mobileNumber\": \"01112224455\",\r\n    \"bio\": \"this is my bio 👼🏻\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"currentPassword\": \"Password@1239\",\r\n    \"newPassword\": \"Password@1234\",\r\n    \"confirmNewPassword\": \"Password@1234\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/change-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "change-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Some user",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/:userId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "6a9fe82a2b7ee0b5428896d9"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload user avatar",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "avatar",
+                  "type": "file",
+                  "src": [
+                    "/D:/MUSTAFA-User/Downloads/1000146522.webp"
+                  ]
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/profile/avatar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "profile",
+                "avatar"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload User Cover",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "avatar",
+                  "type": "file",
+                  "src": [
+                    "/D:/MUSTAFA-User/Downloads/1000146522.webp"
+                  ]
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/profile/avatar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "profile",
+                "avatar"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User avatar",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/profile/avatar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "profile",
+                "avatar"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User Cover",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/profile/cover",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "profile",
+                "cover"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete my Account",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "refreshToken={{refreshToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/delete-account",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "delete-account"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Company",
+      "item": [
+        {
+          "name": "Get Company",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/companies/:companyId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "companies",
+                ":companyId"
+              ],
+              "variable": [
+                {
+                  "key": "companyId",
+                  "value": "6aa18836d130ddaf6f1cf063"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Company",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "companyName",
+                  "value": "acer",
+                  "type": "text"
+                },
+                {
+                  "key": "companyEmail",
+                  "value": "acer@acer.com",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": " acercompany",
+                  "type": "text"
+                },
+                {
+                  "key": "industry",
+                  "value": " tech",
+                  "type": "text"
+                },
+                {
+                  "key": "address",
+                  "value": " cairo",
+                  "type": "text"
+                },
+                {
+                  "key": "numberOfEmployees",
+                  "value": " 100-500",
+                  "type": "text"
+                },
+                {
+                  "key": "HRs",
+                  "value": "[\"6aa17c39b2f47d289a3a81b6\"]",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/companies/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "companies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Company",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/companies/:companyId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "companies",
+                ":companyId"
+              ],
+              "variable": [
+                {
+                  "key": "companyId",
+                  "value": "6aa18898d130ddaf6f1cf065"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Company",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/companies/:companyId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "companies",
+                ":companyId"
+              ],
+              "variable": [
+                {
+                  "key": "companyId",
+                  "value": "6aa18898d130ddaf6f1cf065"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Companies",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/companies/?search=apple&page=1&limit=8&order=desc",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "companies",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "apple"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "8"
+                },
+                {
+                  "key": "order",
+                  "value": "desc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Company Logo",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "logo",
+                  "type": "file",
+                  "src": [
+                    "/D:/MUSTAFA-User/Downloads/1000146522.webp"
+                  ]
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/companies/:companyId/logo",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "companies",
+                ":companyId",
+                "logo"
+              ],
+              "variable": [
+                {
+                  "key": "companyId",
+                  "value": "6aa18898d130ddaf6f1cf065"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Company Cover pic",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "coverPic",
+                  "type": "file",
+                  "src": [
+                    "/D:/MUSTAFA-User/Downloads/1000146522.webp"
+                  ]
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/companies/:companyId/cover",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "companies",
+                ":companyId",
+                "cover"
+              ],
+              "variable": [
+                {
+                  "key": "companyId",
+                  "value": "6aa18898d130ddaf6f1cf065"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Logo image",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/companies/:companyId/logo",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "companies",
+                ":companyId",
+                "logo"
+              ],
+              "variable": [
+                {
+                  "key": "companyId",
+                  "value": "6aa18836d130ddaf6f1cf063"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Cover image",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/companies/:companyId/cover",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "companies",
+                ":companyId",
+                "cover"
+              ],
+              "variable": [
+                {
+                  "key": "companyId",
+                  "value": "6aa18836d130ddaf6f1cf063"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Job",
+      "item": [
+        {
+          "name": "Get Job",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/jobs/:jobId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "jobs",
+                ":jobId"
+              ],
+              "variable": [
+                {
+                  "key": "jobId",
+                  "value": "6aa1cba34fbbe51f657d4199"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Job",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"jobTitle\": \"BackEnd\",\r\n    \"jobDescription\": \"Backend job description\",\r\n    \"technicalSkills\": [\"Nodejs\", \"express\", \"js\"],\r\n    \"softSkills\": [\"commenication\"]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/companies/:companyId/jobs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "companies",
+                ":companyId",
+                "jobs"
+              ],
+              "variable": [
+                {
+                  "key": "companyId",
+                  "value": "6aa18836d130ddaf6f1cf063"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Job",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"jobTitle\": \"junior Frontend\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/jobs/:jobId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "jobs",
+                ":jobId"
+              ],
+              "variable": [
+                {
+                  "key": "jobId",
+                  "value": "6aa1cba34fbbe51f657d4199"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Job",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"jobTitle\": \"junior Frontend\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/jobs/:jobId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "jobs",
+                ":jobId"
+              ],
+              "variable": [
+                {
+                  "key": "jobId",
+                  "value": "6aa1cba34fbbe51f657d4199"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all or specific job for a specific company",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/companies/:companyId/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "companies",
+                ":companyId",
+                "jobs",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "companyId",
+                  "value": "6aa18836d130ddaf6f1cf063"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Browse Jobs with filters",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/jobs/?jobLocation=onsite, remotely&seniorityLevel=fresh",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "jobs",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "jobLocation",
+                  "value": "onsite, remotely"
+                },
+                {
+                  "key": "seniorityLevel",
+                  "value": "fresh"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Application",
+      "item": [
+        {
+          "name": "Apply to Job - Create Application",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "userCV",
+                  "type": "file",
+                  "src": [
+                    "/D:/MUSTAFA-User/Downloads/DECI SL_Pledge_26-27.pdf"
+                  ]
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/jobs/:jobId/apply",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "jobs",
+                ":jobId",
+                "apply"
+              ],
+              "variable": [
+                {
+                  "key": "jobId",
+                  "value": "6aa18b1bdb38e6975b3bc379"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Application Status",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    // \"status\": \"viewed\"\r\n    // \"status\": \"consideration\"\r\n    \"status\": \"accepted\"\r\n    // \"status\": \"rejected\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/applications/:applicationId/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "applications",
+                ":applicationId",
+                "status"
+              ],
+              "variable": [
+                {
+                  "key": "applicationId",
+                  "value": "6aa18b1bdb38e6975b3bc379"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all applications for specific Job",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/jobs/:jobId/applications",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "jobs",
+                ":jobId",
+                "applications"
+              ],
+              "variable": [
+                {
+                  "key": "jobId",
+                  "value": "6aa18b1bdb38e6975b3bc379"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Export applications for company to exel",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/companies/:companyId/applications/export?day=2026-09-09",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "companies",
+                ":companyId",
+                "applications",
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "day",
+                  "value": "2026-09-09"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "companyId",
+                  "value": "6aa18836d130ddaf6f1cf063"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

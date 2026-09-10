@@ -32,6 +32,6 @@ export async function getUnreadCount(req: Request, res: Response) {
 
 export async function createGroup(req: Request, res: Response) {
 	const { user, body, file } = req || {};
-	await services.createGroup(user as IUserBody, body as ICreateGroupDTO, file as IFile);
+	await services.createGroup(user as IUserBody, body as ICreateGroupDTO, file.groupImg as IFile);
 	successResponse({ res, message: 'Group created successfully' });
 }

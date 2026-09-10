@@ -41,7 +41,7 @@ export const routes = {
 	activateMyAccount: '/reactivate',
 };
 
-router.post(routes.checkUsername, validation(V.checkUsernameSchema), C.checkUsername);
+// router.post(routes.checkUsername, validation(V.checkUsernameSchema), C.checkUsername);
 
 router.post(routes.register, validation(V.registerSchema), C.register);
 router.post(routes.resendOtp, validation(V.resendOtpSchema), C.resendOtp);

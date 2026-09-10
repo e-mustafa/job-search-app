@@ -15,10 +15,10 @@ import {
 	IVerifyAccountDTO,
 } from './auth.validation';
 
-export const checkUsername = async (req: Request, res: Response) => {
-	const available = await services.checkUsername(req.body.username);
-	successResponse({ res, data: { available } });
-};
+// export const checkUsername = async (req: Request, res: Response) => {
+// 	const available = await services.checkUsername(req.body.username);
+// 	successResponse({ res, data: { available } });
+// };
 
 export const register = async (req: Request, res: Response) => {
 	await services.register(req.body);

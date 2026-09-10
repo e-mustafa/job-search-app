@@ -92,7 +92,7 @@ companySchema.virtual('jobs', {
 
 // Document Middleware: Triggers on `doc.deleteOne()` and `doc.findOneAndDelete()`
 companySchema.pre('deleteOne', { document: true, query: false }, async function (this: HydratedDocument<ICompany>) {
-	// Delete all comments associated with this post ID
+	// Delete all comments associated with this company ID
 	await Job.deleteMany({ companyId: this._id });
 	await Application.deleteMany({ companyId: this._id });
 });
@@ -102,7 +102,7 @@ companySchema.pre(
 	{ document: false, query: true },
 	async function (this: Query<ICompany | null, ICompany>) {
 		const docToDelete = await this.model.findOne<HydratedDocument<ICompany>>(this.getFilter());
-		// Delete all comments associated with this post ID
+		// Delete all comments associated with this company ID
 		if (docToDelete) {
 			await Job.deleteMany({ companyId: docToDelete._id });
 			await Application.deleteMany({ companyId: docToDelete._id });

@@ -35,7 +35,7 @@ export async function deleteCompany(req: Request, res: Response) {
 
 export async function uploadCompanyPic(req: Request, res: Response) {
 	const fieldName = Object.keys(req.file || {})[0] || 'logo';
-	const file: IFile = req.file?.[fieldName] || {};
+	const file: IFile = (req.file?.[fieldName] || {}) as IFile;
 	const data = await services.uploadCompanyPic(req.user?._id as Id, req.params.companyId as string, file);
 	successResponse({ res, message: `${file.fieldname} uploaded successfully`, data });
 }

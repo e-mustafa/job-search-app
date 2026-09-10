@@ -2,6 +2,9 @@ import { Model, model, Schema } from 'mongoose';
 import mongooseLeanVirtuals from 'mongoose-lean-virtuals';
 import { JobLocationEnum, SeniorityLevelEnum, WorkingTimeEnum } from './job.enum';
 import { IJob } from './job.types';
+import { HydratedDocument } from 'mongoose';
+import { Query } from 'mongoose';
+import Application from '../application/application.model';
 
 const jobSchema = new Schema<IJob>(
 	{
@@ -90,6 +93,20 @@ jobSchema.index({ seniorityLevel: 1, createdAt: -1 });
 // 	foreignField: 'jobId',
 // 	ref: 'Application',
 // });
+
+// Document Middleware: Triggers on `doc.deleteOne()` and `doc.findOneAndDelete()`
+jobSchema.pre('deleteOne', { document: true, query: false }, async function (this: HydratedDocument<IJob>) {
+	// Delete all comments associated with this Job ID
+	await Application.deleteMany({ companyId: this._id });
+});
+
+jobSchema.pre('findOneAndDelete', { document: false, query: true }, async function (this: Query<IJob | null, IJob>) {
+	const docToDelete = await this.model.findOne<HydratedDocument<IJob>>(this.getFilter());
+	// Delete all comments associated with this Job ID
+	if (docToDelete) {
+		await Application.deleteMany({ companyId: docToDelete._id });
+	}
+});
 
 const Job: Model<IJob> = model<IJob>('Job', jobSchema);
 

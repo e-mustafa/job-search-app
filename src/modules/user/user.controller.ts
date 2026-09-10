@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import { successResponse } from '../../shared/response/success.response';
 import { Id, IFile } from '../../shared/types';
 import { IParamsIdDTO, IQueryDTO } from '../../shared/validation/general-fields.validation';
-import services from './user.service';
-import authServices from '../auth/auth.service';
 import { removeCookiesTokens } from '../../utils/security/set-cookies.security';
+import authServices from '../auth/auth.service';
+import services from './user.service';
 
 export async function getMyProfile(req: Request, res: Response) {
 	const data = await services.getMyProfile(req.user?._id as Id);
@@ -17,7 +17,7 @@ export async function updateProfile(req: Request, res: Response) {
 }
 
 export async function uploadUserPic(req: Request, res: Response) {
-	const uFile: IFile = Object.values(req.file || {})[0];
+	const uFile: IFile = Object.values(req.file || {})[0] || ({} as IFile);
 	const data = await services.uploadUserPic(req.user?._id as Id, uFile as IFile);
 	successResponse({ res, message: `${uFile.fieldname} uploaded successfully`, data });
 }
@@ -50,8 +50,8 @@ export async function getUsers(req: Request, res: Response) {
 export async function deleteMyAccount(req: Request, res: Response) {
 	const data = await services.deleteMyAccount(req.user?._id as Id);
 	await authServices.logoutAll(req.cookies.refreshToken);
-		// remove cookies
-		removeCookiesTokens(res);
+	// remove cookies
+	removeCookiesTokens(res);
 	successResponse({ res, message: 'Account deleted successfully' });
 }
 

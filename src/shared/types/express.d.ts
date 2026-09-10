@@ -19,6 +19,7 @@ declare module 'express-serve-static-core' {
 		user?: IUserBody;
 		decoded?: IJwtPayload;
 		body: Record<string, unknown>;
+		file: Record<string, Express.Multer.File>;
 	}
 }
 

@@ -9,9 +9,9 @@ export default app;
 
 
 //! 👈🏻👈🏻👈🏻👈🏻 <-- postman collection
-// https://documenter.getpostman.com/view/49016393/2sBY4Tpxq3
+// https://documenter.getpostman.com/view/49016393/2sBYAxRq9J
 
 //! 👈🏻👈🏻👈🏻👈🏻 <-- Github link
-// https://github.com/e-mustafa/social-media-app
+// https://github.com/e-mustafa/job-search-app
 
 // npm run dev2
