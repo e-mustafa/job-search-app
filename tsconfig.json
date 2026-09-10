@@ -12,11 +12,11 @@
 		"noImplicitAny": true,
 		"strictNullChecks": true,
 		"strictFunctionTypes": true,
-		"noUnusedLocals": true,
+		// "noUnusedLocals": true,
 		"noUnusedParameters": true,
 
 		/* Module Interop */
-		"esModuleInterop": true,
+		// "esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
