@@ -1,5 +1,5 @@
 import express, { Express } from 'express';
-import { bootstrap } from './bootstrap';
+import { bootstrap } from './bootstrap.js';
 
 const app: Express = express();
 

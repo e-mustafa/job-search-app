@@ -41,7 +41,7 @@ class CompanyServices {
 		return companies; // as unknown as IPaginatedResult<ICompany>;
 	}
 
-	async getCompany(userId: Id, companyId: string): Promise<ICompanyWJobs> {
+	async getCompany(_userId: Id, companyId: string): Promise<ICompanyWJobs> {
 		const company = await this.CompanyRepo.findById(companyId)
 			.lean()
 			.populate<ICompanyWJobs>({ path: 'jobs', select: '-addedBy -createdBy' })

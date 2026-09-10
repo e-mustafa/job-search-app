@@ -492,7 +492,7 @@ class AuthServices {
 		return true;
 	}
 
-	async getThisSession(userId: Id, refreshToken: string): Promise<ISessionResponse> {
+	async getThisSession(_userId: Id, refreshToken: string): Promise<ISessionResponse> {
 		const payload = decodeToken(refreshToken, true);
 		if (!payload || !payload.id || !payload.jti) {
 			throw new NotFoundException('Invalid refresh token', 'getSessions');
@@ -505,7 +505,7 @@ class AuthServices {
 		return { ...session, active: true } as ISessionResponse;
 	}
 
-	public async getMySessions(userId: Id, refreshToken: string): Promise<ISessionResponse[]> {
+	public async getMySessions(_userId: Id, refreshToken: string): Promise<ISessionResponse[]> {
 		const payload = decodeToken(refreshToken, true);
 		if (!payload || !payload.id || !payload.jti) {
 			throw new NotFoundException('Invalid refresh token', 'getSessions');

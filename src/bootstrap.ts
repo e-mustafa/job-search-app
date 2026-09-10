@@ -31,16 +31,6 @@ import { initializeSocket } from './utils/socket/socket.init';
 
 const apiBaseUrl = ENV.apiBaseUrl;
 
-// Safe logging helper to avoid ESM crashes in Serverless environments
-const logServerStart = (port: string | number): void => {
-	const message = `✔ App is running on port: ${port}`;
-	try {
-		console.log(chalk.bgGreenBright.bold(message));
-	} catch {
-		console.log(`[SERVER RUNNING] ${message}`);
-	}
-};
-
 export const bootstrap = (app: Express): void => {
 	app.set('trust proxy', 1);
 
@@ -87,7 +77,9 @@ export const bootstrap = (app: Express): void => {
 
 	// Skip app.listen and Socket initialization in Vercel environment
 	if (process.env.VERCEL !== '1') {
-		const httpServer = app.listen(ENV.port, (): void => logServerStart(ENV.port));
+		const httpServer = app.listen(ENV.port, (): void =>
+			console.log(chalk.bgGreenBright.bold('✔ App is running on port: ' + ENV.port)),
+		);
 
 		initializeSocket(httpServer);
 	}
